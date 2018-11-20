@@ -3,4 +3,26 @@
     <string name="text_one">Are you curious about the world?</string>
     <string name="text_two">Do you want to know where we are from?</string>
     <string name="text_three">Let\'s explore the origins of the universe together!</string>
+
+    <string name="par1_sec1_sen1">The Big Bang theory is an effort to explain what happened at the very beginning of our universe.</string>
+    <string name="par1_sec1_sen2">Discoveries in astronomy and physics have shown beyond a reasonable doubt that our universe did in fact have a beginning.</string>
+    <string name="par1_sec1_sen3">Our universe sprang into existence as "singularity" around 13.7 billion years ago.</string>
+    <string name="par1_sec1_sen4">What is a "singularity" and where does it come from? Well, to be honest, we don\'t know for sure.</string>
+    <string name="par1_sec1_sen5">Singularities are zones which defy our current understanding of physics. They are thought to exist at the core of "black holes."</string>
+    <string name="par1_sec1_sen6">Black holes are areas of intense gravitational pressure. The pressure is thought to be so intense that finite matter is actually squished into infinite density</string>
+    <string name="par1_sec1_sen7">These zones of infinite density are called "singularities." </string>
+    <string name="par1_sec1_sen9">Our universe is thought to have begun as an infinitesimally small, infinitely hot, infinitely dense, something - a singularity.</string>
+    <string name="par1_sec1_sen10">Where did it come from? We don\'t know. Why did it appear? We don\'t know. </string>
+
+    <string name="part1_s1_q1">What is the Big Bang theory?</string>
+    <string name="part1_s1_a1_A">It explain what happened at the very beginning of our universe.</string>
+    <string name="part1_s1_a1_B">It explain what happened at the end of our universe.</string>
+
+    <string name="part1_s1_q2">Why we doubt our universe did in fact have a beginning?</string>
+    <string name="part1_s1_a2_A">Based on the discoveries in astronomy and physics.</string>
+    <string name="part1_s1_a2_B">Based on the discoveries in chemistry and biology.</string>
+
+    <string name="part1_s1_q3">What is "singularities"?</string>
+    <string name="part1_s1_a3_A">These zones of infinite density.</string>
+    <string name="part1_s1_a3_B">These zones of limited density.</string>
 </resources>
