@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ParticleTextView-master.iml" filepath="$PROJECT_DIR$/../ParticleTextView-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../app_test/app_test.iml" filepath="$PROJECT_DIR$/../app_test/app_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/../mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/../mylibrary/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/particletextview.iml" filepath="$PROJECT_DIR$/particletextview.iml" />
+    </modules>
+  </component>
+</project>
