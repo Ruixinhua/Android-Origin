@@ -25,4 +25,8 @@
     <string name="part1_s1_q3">What is "singularities"?</string>
     <string name="part1_s1_a3_A">These zones of infinite density.</string>
     <string name="part1_s1_a3_B">These zones of limited density.</string>
+    <string name="username">User Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.origin.rxh.origin;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.yasic.library.particletextview.MovingStrategy.MovingStrategy;
