@@ -17,11 +17,11 @@ public class StartAnimationActivity extends BaseActivity {
         String texts[] = {this.getString(R.string.text_one),this.getString(R.string.text_two),this.getString(R.string.text_three)};
         ParticleTextView particleTextView = findViewById(R.id.startText);
         RandomMovingStrategy randomMovingStrategy = new RandomMovingStrategy();
-        particleTextView.setConfig(setConfig(2,texts,0.2f,40,randomMovingStrategy));
+        particleTextView.setConfig(setConfig(2,texts,0.2f,40,4000l,randomMovingStrategy));
         particleTextView.startAnimation();
     }
 
-    private ParticleTextViewConfig setConfig(int step, String []texts, float releasing, int size, MovingStrategy ms){
+    private ParticleTextViewConfig setConfig(int step, String []texts, float releasing, int size, long delay, MovingStrategy ms){
         ParticleTextViewConfig config = new ParticleTextViewConfig.Builder()
                 .setRowStep(step)
                 .setColumnStep(step)
@@ -30,6 +30,7 @@ public class StartAnimationActivity extends BaseActivity {
                 .setParticleRadius(1)
                 .setMiniDistance(0.1)
                 .setTextSize(size)
+                .setDelay(delay)
                 .setMovingStrategy(ms)
                 .instance();
         return config;

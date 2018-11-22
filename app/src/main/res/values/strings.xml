@@ -29,4 +29,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="enterusername">Enter Username</string>
+    <string name="enterpassword">Enter Password</string>
 </resources>
