@@ -1,11 +1,10 @@
-package com.origin.rxh.origin;
+package com.origin.rxh.origin.general;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-public class BaseActivity extends AppCompatActivity {
-
+public class LandActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

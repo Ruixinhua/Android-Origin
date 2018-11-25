@@ -5,17 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.origin.rxh.origin.Question;
-import com.origin.rxh.origin.UserInfo;
+import com.origin.rxh.origin.general.Question;
+import com.origin.rxh.origin.general.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBService {
-    MyDBHelper dbhelper;
-
+    private MyDBHelper dbhelper;
+    private SQLiteDatabase database;
+    private ContentValues values;
     public DBService(Context context) {
         dbhelper = new MyDBHelper(context);
+        dbhelper.createTable(dbhelper.getWritableDatabase());
     }
 
     public ContentValues userInfoToContentValues(UserInfo userInfo) {
@@ -40,7 +42,6 @@ public class DBService {
 
     public ContentValues questionToContentValues(Question question) {
         ContentValues contentValues = new ContentValues();
-        String[] content = {"questionNo", "question", "answer"};
         contentValues.put("questionNo", question.getQuestionNo());
         contentValues.put("question", question.getQuestion());
         String answer = "";
@@ -53,9 +54,8 @@ public class DBService {
     }
 
     public void saveQestion(Question question) {
-        SQLiteDatabase database = dbhelper.getWritableDatabase();
-        ContentValues values = questionToContentValues(question);
-        dbhelper.createTable(database);
+        database = dbhelper.getWritableDatabase();
+        values = questionToContentValues(question);
         Cursor cursor = database.query(MyDBHelper.TABLE_QUESTION, null, "questionNo=?", new String[]{question.getQuestionNo()}, null, null, null);
         if (cursor.getCount() == 0)
             database.insert(MyDBHelper.TABLE_QUESTION, null, values);
@@ -65,21 +65,20 @@ public class DBService {
     }
 
     public Question getQuestion(String id) {
-        SQLiteDatabase database = dbhelper.getWritableDatabase();
-        dbhelper.createTable(database);
+        database = dbhelper.getWritableDatabase();
         Cursor cursor = database.query(MyDBHelper.TABLE_QUESTION, null, "questionNo=?", new String[]{id}, null, null, null);
         if (cursor.moveToFirst()) {
             cursor.move(0);
             return new Question(cursor.getString(0), cursor.getString(1), cursor.getString(2).split("-"));
         }
+        database.close();
         return null;
     }
 
     // save the user
     public void saveUser(UserInfo userInfo) {
-        SQLiteDatabase database = dbhelper.getWritableDatabase();
-        ContentValues values = userInfoToContentValues(userInfo);
-        dbhelper.createTable(database);
+        database = dbhelper.getWritableDatabase();
+        values = userInfoToContentValues(userInfo);
         Cursor cursor = database.query(MyDBHelper.TABLE_USER, null, "username=?", new String[]{userInfo.getUsername()}, null, null, null);
         if (cursor.getCount() == 0)
             database.insert(MyDBHelper.TABLE_USER, null, values);
@@ -88,10 +87,45 @@ public class DBService {
         database.close();
     }
 
+    public void saveUserTemp(String username){
+        database = dbhelper.getWritableDatabase();
+        values = new ContentValues();
+        values.put("id", 1);
+        values.put("username", username);
+        Cursor cursor = database.query(MyDBHelper.TABLE_USER_NOW, null, "id=1", null, null, null, null);
+        if (cursor.getCount() == 0)
+            database.insert(MyDBHelper.TABLE_USER_NOW, null, values);
+        else
+            database.update(MyDBHelper.TABLE_USER_NOW, values, null,null);
+        database.close();
+    }
+
+    public String getUserTemp(){
+        database = dbhelper.getWritableDatabase();
+        Cursor cursor = database.query(MyDBHelper.TABLE_USER_NOW, null, "id=?", new String[]{"1"}, null, null, null);
+        if(cursor.getCount() == 0){
+            database.close();
+            return null;
+        }else {
+            cursor.moveToFirst();
+            String username = cursor.getString(1);
+            database.close();
+            return username;
+
+        }
+
+    }
+
+    public boolean deleteUserTemp(){
+        database = dbhelper.getWritableDatabase();
+        boolean isDelete = database.delete(MyDBHelper.TABLE_USER_NOW, "id=1",null) > 0;
+        database.close();
+        return isDelete;
+    }
+
     // get the user
     public UserInfo getUser(String id) {
-        SQLiteDatabase database = dbhelper.getWritableDatabase();
-        dbhelper.createTable(database);
+        database = dbhelper.getWritableDatabase();
         Cursor cursor = database.query(MyDBHelper.TABLE_USER, null, "username=?", new String[]{id}, null, null, null);
         if (cursor.moveToFirst()) {
             cursor.move(0);
@@ -105,6 +139,7 @@ public class DBService {
             }
             return new UserInfo(cursor.getString(0),cursor.getString(1),cursor.getInt(2),correct,wrong);
         }
+        database.close();
         return null;
     }
 

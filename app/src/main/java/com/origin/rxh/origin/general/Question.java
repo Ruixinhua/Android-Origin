@@ -1,4 +1,4 @@
-package com.origin.rxh.origin;
+package com.origin.rxh.origin.general;
 
 public class Question {
     private String questionNo;

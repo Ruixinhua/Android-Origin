@@ -2,7 +2,7 @@
     <string name="app_name">Origin</string>
     <string name="text_one">Are you curious about the world?</string>
     <string name="text_two">Do you want to know where we are from?</string>
-    <string name="text_three">Let\'s explore the origins of the universe together!</string>
+    <string name="text_three">Let\'s explore the origin of the universe together!</string>
 
     <string name="par1_sec1_sen1">The Big Bang theory is an effort to explain what happened at the very beginning of our universe.</string>
     <string name="par1_sec1_sen2">Discoveries in astronomy and physics have shown beyond a reasonable doubt that our universe did in fact have a beginning.</string>
@@ -31,4 +31,16 @@
     <string name="register">Register</string>
     <string name="enterusername">Enter Username</string>
     <string name="enterpassword">Enter Password</string>
+    <string name="stars">The universe is going expand</string>
+    <string name="expand">The stars is created</string>
+    <string name="bigbang">Bigbang</string>
+    <string name="returnMenu">Return Menu</string>
+    <string name="moreInfo">More Info</string>
+    <string name="start">Let\'s Start</string>
+    <string name="start_stage1">Stage 1: Big Bang</string>
+    <string name="start_stage2">Stage 2: Galaxy Born</string>
+    <string name="start_stage3">Stage 3: Stars Shine</string>
+    <string name="logout">Logout</string>
+    <string name="jump">Jump</string>
+    <string name="return_text">Return</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.origin.rxh.origin;
+package com.origin.rxh.origin.general;
 
 import java.util.ArrayList;
 import java.util.List;
