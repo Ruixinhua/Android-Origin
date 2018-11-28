@@ -4,11 +4,13 @@ public class Question {
     private String questionNo;
     private String question;
     private String [] answer;
+    private int correctAnswer;
 
-    public Question(String questionNo, String question, String[] answer) {
+    public Question(String questionNo, String question, String[] answer, int correctAnswer) {
         this.questionNo = questionNo;
         this.question = question;
         this.answer = answer;
+        this.correctAnswer = correctAnswer;
     }
 
     public String getQuestion() {
@@ -21,5 +23,9 @@ public class Question {
 
     public String getQuestionNo() {
         return questionNo;
+    }
+
+    public int getCorrectAnswer() {
+        return correctAnswer;
     }
 }

@@ -1,5 +1,6 @@
 package com.origin.rxh.origin.listener;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -17,5 +18,6 @@ public class NextActivityClickListener implements View.OnClickListener {
     public void onClick(View v) {
         Intent stageActivity = new Intent(context,stageClass);
         context.startActivity(stageActivity);
+        //((Activity)context).finish();
     }
 }

@@ -1,4 +1,4 @@
-package com.origin.rxh.origin.start;
+package com.origin.rxh.origin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
-import com.origin.rxh.origin.general.LandActivity;
+import com.origin.rxh.origin.base.LandActivity;
 import com.origin.rxh.origin.R;
 import com.origin.rxh.origin.general.Setting;
 import com.yasic.library.particletextview.View.ParticleTextView;
@@ -47,7 +47,7 @@ public class StartActivity extends LandActivity {
                     handler.removeCallbacks(this);
                 }
                 runCount++;
-                handler.postDelayed(this, (Setting.getDelay() + 300) * 2);
+                handler.postDelayed(this, (Setting.getDelay() + 300) * 3);
             }
 
         };

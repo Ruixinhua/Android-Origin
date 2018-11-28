@@ -9,7 +9,9 @@ import com.origin.rxh.origin.general.Question;
 import com.origin.rxh.origin.general.UserInfo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DBService {
     private MyDBHelper dbhelper;
@@ -25,15 +27,15 @@ public class DBService {
         contentValues.put("username", userInfo.getUsername());
         contentValues.put("password", userInfo.getPassword());
         contentValues.put("grades", userInfo.getGrade());
-        List<Question> corrects = userInfo.getCorrectQue();
+        Map<String,Question>  corrects = userInfo.getCorrectQue();
         String correct = "";
-        for (Question q : corrects) {
+        for (Question q : corrects.values()) {
             correct += (q.getQuestionNo() + "-");
         }
-        List<Question> wrong = userInfo.getWrongQue();
+        Map<String,Question>  wrong = userInfo.getWrongQue();
         String w = "";
-        for (Question q : wrong) {
-            correct += (q.getQuestionNo() + "-");
+        for (Question q : wrong.values()) {
+            w += (q.getQuestionNo() + "-");
         }
         contentValues.put("correct", correct);
         contentValues.put("wrong", w);
@@ -50,10 +52,11 @@ public class DBService {
             answer += (answers[i] + "-");
         }
         contentValues.put("answer", answer);
+        contentValues.put("correct", question.getCorrectAnswer());
         return contentValues;
     }
 
-    public void saveQestion(Question question) {
+    public void saveQuestion(Question question) {
         database = dbhelper.getWritableDatabase();
         values = questionToContentValues(question);
         Cursor cursor = database.query(MyDBHelper.TABLE_QUESTION, null, "questionNo=?", new String[]{question.getQuestionNo()}, null, null, null);
@@ -69,7 +72,7 @@ public class DBService {
         Cursor cursor = database.query(MyDBHelper.TABLE_QUESTION, null, "questionNo=?", new String[]{id}, null, null, null);
         if (cursor.moveToFirst()) {
             cursor.move(0);
-            return new Question(cursor.getString(0), cursor.getString(1), cursor.getString(2).split("-"));
+            return new Question(cursor.getString(0), cursor.getString(1), cursor.getString(2).split("-"),cursor.getInt(3));
         }
         database.close();
         return null;
@@ -129,13 +132,19 @@ public class DBService {
         Cursor cursor = database.query(MyDBHelper.TABLE_USER, null, "username=?", new String[]{id}, null, null, null);
         if (cursor.moveToFirst()) {
             cursor.move(0);
-            List<Question> correct = new ArrayList<>();
-            List<Question> wrong = new ArrayList<>();
+            Map<String,Question> correct = new HashMap<>();
+            Map<String,Question> wrong = new HashMap<>();
             for(String s:cursor.getString(3).split("-")){
-                correct.add(getQuestion(s));
+                Question q = getQuestion(s);
+                if(q != null){
+                    correct.put(s,q);
+                }
             }
             for(String s:cursor.getString(4).split("-")){
-                wrong.add(getQuestion(s));
+                Question q = getQuestion(s);
+                if(q != null){
+                    wrong.put(s,q);
+                }
             }
             return new UserInfo(cursor.getString(0),cursor.getString(1),cursor.getInt(2),correct,wrong);
         }

@@ -1,24 +1,26 @@
 package com.origin.rxh.origin.general;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserInfo {
     private String username;
     private String password;
     private int grade;
-    private List<Question> correctQue;
-    private List<Question> wrongQue;
+    private Map<String,Question> correctQue;
+    private Map<String,Question> wrongQue;
 
     public UserInfo(String username, String password) {
         this.username = username;
         this.password = password;
         grade = 0;
-        correctQue = new ArrayList<>();
-        wrongQue = new ArrayList<>();
+        correctQue = new HashMap<>();
+        wrongQue = new HashMap<>();
     }
 
-    public UserInfo(String username, String password, int grade, List<Question> correctQue, List<Question> wrongQue) {
+    public UserInfo(String username, String password, int grade, Map<String,Question> correctQue, Map<String,Question> wrongQue) {
         this.username = username;
         this.password = password;
         this.grade = grade;
@@ -42,19 +44,19 @@ public class UserInfo {
         grade += addGrade;
     }
 
-    public List<Question> getCorrectQue() {
-        return correctQue;
-    }
-
     public void updateCorrect(Question question){
-        correctQue.add(question);
+        correctQue.put(question.getQuestionNo(),question);
     }
 
     public void updateWrong(Question question){
-        wrongQue.add(question);
+        wrongQue.put(question.getQuestionNo(),question);
     }
 
-    public List<Question> getWrongQue() {
+    public Map<String, Question> getCorrectQue() {
+        return correctQue;
+    }
+
+    public Map<String, Question> getWrongQue() {
         return wrongQue;
     }
 }

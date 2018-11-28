@@ -1,4 +1,4 @@
-package com.origin.rxh.origin.start;
+package com.origin.rxh.origin.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.origin.rxh.origin.general.BaseActivity;
+import com.origin.rxh.origin.base.BaseActivity;
 import com.origin.rxh.origin.R;
 import com.origin.rxh.origin.general.UserInfo;
 import com.origin.rxh.origin.database.DBService;
@@ -19,7 +20,7 @@ public class LoginActivity extends BaseActivity {
     private EditText passwordEdit;
     private Button registerBtn;
     private Button loginBtn;
-    private DBService dbs;
+    public static DBService dbs;
     private static UserInfo user;
 
     @Override
@@ -66,12 +67,10 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private UserInfo saveUser(){
-        UserInfo user = new UserInfo(getUsername(),getPassword());
+    private void saveUser(){
+        user = new UserInfo(getUsername(),getPassword());
         dbs.saveUser(user);
         dbs.saveUserTemp(user.getUsername());
-        user = dbs.getUser(dbs.getUserTemp());
-        return user;
     }
 
     private UserInfo getUser(){
@@ -97,6 +96,7 @@ public class LoginActivity extends BaseActivity {
 
     private void changeToAnimation(){
         saveUser();
+        fullScreen();
         Intent startAnimation = new Intent(LoginActivity.this, StartActivity.class);
         startAnimation.putExtra("username",user.getUsername());
         startActivity(startAnimation);
@@ -104,7 +104,8 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void changeToMenu(String username){
-        user = dbs.getUser(dbs.getUserTemp());
+        user = getUserInfo();
+        fullScreen();
         Intent startMenu = new Intent(LoginActivity.this, MenuActivity.class);
         startMenu.putExtra("username",username);
         startActivity(startMenu);
@@ -124,6 +125,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
         builder.show();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     // if the user has login, he / she will enter the menu activity
@@ -136,7 +138,9 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-    public static UserInfo getUserInfo(){
+    public UserInfo getUserInfo(){
+        dbs = new DBService(this);
+        user = dbs.getUser(dbs.getUserTemp());
         return user;
     }
 

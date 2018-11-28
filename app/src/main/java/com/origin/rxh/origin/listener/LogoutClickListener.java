@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.origin.rxh.origin.general.ActivityManager;
-import com.origin.rxh.origin.start.LoginActivity;
+import com.origin.rxh.origin.activity.LoginActivity;
 import com.origin.rxh.origin.database.DBService;
 
 public class LogoutClickListener implements View.OnClickListener {

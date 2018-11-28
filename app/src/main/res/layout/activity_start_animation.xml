@@ -8,7 +8,7 @@
     android:layout_weight="6"
     android:background="@drawable/res3"
     tools:background="@drawable/res3"
-    tools:context=".start.LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <com.yasic.library.particletextview.View.ParticleTextView
         android:id="@+id/startText"

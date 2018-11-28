@@ -97,6 +97,20 @@ public class ParticleTextView extends View {
         this.textIterator = 0;
     }
 
+    public void backwardAnimation(){
+        if(isAnimationFrozen){
+            textIterator--;
+            if(textIterator < 0) textIterator = 0;
+        }
+    }
+
+    public void forwardAnimation(){
+        if(isAnimationFrozen){
+            textIterator++;
+            if(textIterator == targetTextArray.length) textIterator = targetTextArray.length;
+        }
+    }
+
     public boolean isAnimationPause() {
         return this.isAnimationPause;
     }
@@ -152,7 +166,11 @@ public class ParticleTextView extends View {
 
         if (!checkJudgeDistance()) {
             Log.d("Particles", "Paused");
-            pauseAnimation();
+            if(delay < 0){
+                setAnimationFrozen();
+            }else {
+                pauseAnimation();
+            }
         }
 
         if (!isAnimationFrozen)
@@ -239,6 +257,7 @@ public class ParticleTextView extends View {
             if (item != null) {
                 item.updatePathProcess();
                 if (item.getPathProcess() == item.getPath().length - 1){
+                    Log.d("Particles", "Stop");
                     isAnimationStop = true;
                 }
                 else {

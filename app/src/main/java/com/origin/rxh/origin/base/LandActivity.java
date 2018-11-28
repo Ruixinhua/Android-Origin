@@ -1,8 +1,7 @@
-package com.origin.rxh.origin.general;
+package com.origin.rxh.origin.base;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
 
 public class LandActivity extends BaseActivity{
     @Override

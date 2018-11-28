@@ -4,9 +4,15 @@
     <string name="text_two">Do you want to know where we are from?</string>
     <string name="text_three">Let\'s explore the origin of the universe together!</string>
 
-    <string name="par1_sec1_sen1">The Big Bang theory is an effort to explain what happened at the very beginning of our universe.</string>
-    <string name="par1_sec1_sen2">Discoveries in astronomy and physics have shown beyond a reasonable doubt that our universe did in fact have a beginning.</string>
-    <string name="par1_sec1_sen3">Our universe sprang into existence as "singularity" around 13.7 billion years ago.</string>
+    <string name="par1_sec1_sen1_1">The Big Bang theory is trying to</string>
+    <string name="par1_sec1_sen1_2">explain what happened of our universe</string>
+    <string name="par1_sec1_sen1_3">at the very beginning of time.</string>
+    <string name="par1_sec1_sen2_1">Discoveries in astronomy and physics</string>
+    <string name="par1_sec1_sen2_2">have shown reasonable doubt</string>
+    <string name="par1_sec1_sen2_3">that our universe have a beginning</string>
+    <string name="par1_sec1_sen3_1">Our universe at the beginning</string>
+    <string name="par1_sec1_sen3_2">sprang into "singularity"</string>
+    <string name="par1_sec1_sen3_3">around 13.7 billion years ago.</string>
     <string name="par1_sec1_sen4">What is a "singularity" and where does it come from? Well, to be honest, we don\'t know for sure.</string>
     <string name="par1_sec1_sen5">Singularities are zones which defy our current understanding of physics. They are thought to exist at the core of "black holes."</string>
     <string name="par1_sec1_sen6">Black holes are areas of intense gravitational pressure. The pressure is thought to be so intense that finite matter is actually squished into infinite density</string>
@@ -15,8 +21,8 @@
     <string name="par1_sec1_sen10">Where did it come from? We don\'t know. Why did it appear? We don\'t know. </string>
 
     <string name="part1_s1_q1">What is the Big Bang theory?</string>
-    <string name="part1_s1_a1_A">It explain what happened at the very beginning of our universe.</string>
-    <string name="part1_s1_a1_B">It explain what happened at the end of our universe.</string>
+    <string name="part1_s1_a1_A">It is a theory about universe.</string>
+    <string name="part1_s1_a1_B">It is a theory about art.</string>
 
     <string name="part1_s1_q2">Why we doubt our universe did in fact have a beginning?</string>
     <string name="part1_s1_a2_A">Based on the discoveries in astronomy and physics.</string>
@@ -43,4 +49,21 @@
     <string name="logout">Logout</string>
     <string name="jump">Jump</string>
     <string name="return_text">Return</string>
+    <string name="title_activity_login">Sign in</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="forward_text">Forward</string>
+    <string name="backward_text">Backward</string>
+    <string name="correct_question">Correct Question</string>
+    <string name="wrong_question">Wrong Question</string>
 </resources>
