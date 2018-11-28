@@ -39,11 +39,14 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(getUsername().length() == 0){
-                    setDialog("Username empty","The username can not be empty");
+                    setDialog("Username empty","The username can not be empty",LoginActivity.this);
+                    setFullScreen();
                 }else if(getUsername().length() > 10){
-                    setDialog("Invalid Username","The length of username should not exceed 10");
+                    setDialog("Invalid Username","The length of username should not exceed 10",LoginActivity.this);
+                    setFullScreen();
                 }else if(getPassword().length() < 5 || getPassword().length() > 10){
-                    setDialog("Invalid Password","The length of password should between 6~10");
+                    setDialog("Invalid Password","The length of password should between 6~10",LoginActivity.this);
+                    setFullScreen();
                 }else{
                     changeToAnimation();
                 }
@@ -57,10 +60,12 @@ public class LoginActivity extends BaseActivity {
                         dbs.saveUserTemp(getUser().getUsername());
                         changeToMenu(getUser().getUsername());
                     } else {
-                        setDialog("Can't login", "The password is wrong");
+                        setDialog("Can't login", "The password is wrong",LoginActivity.this);
+                        setFullScreen();
                     }
                 }else{
-                    setDialog("Can't login","The user is not exist!!");
+                    setDialog("Can't login","The user is not exist!!",LoginActivity.this);
+                    setFullScreen();
                 }
 
             }
@@ -112,20 +117,13 @@ public class LoginActivity extends BaseActivity {
         this.finish();
     }
 
-    private void setDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-        builder.setIcon(R.drawable.ic_launcher_background);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setPositiveButton("return", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-            }
-        });
-        builder.show();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+    private void setFullScreen(){
+        WindowManager.LayoutParams lp =  getWindow().getAttributes();
+        lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        getWindow().setAttributes(lp);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     // if the user has login, he / she will enter the menu activity

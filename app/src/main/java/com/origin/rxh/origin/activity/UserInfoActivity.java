@@ -3,6 +3,7 @@ package com.origin.rxh.origin.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,9 @@ public class UserInfoActivity extends BaseActivity {
                 new QuestionListAdapter(this, R.id.item_text, questions.get(2)), new QuestionListAdapter(this, R.id.item_text, questions.get(3)),
                 new QuestionListAdapter(this, R.id.item_text, questions.get(4)), new QuestionListAdapter(this, R.id.item_text, questions.get(5))};
         for (int i = 0; i < questionsList.length; i++) {
+            if(adapters[i] == null){
+                Log.d("adapters","null");
+            }
             questionsList[i].setAdapter(adapters[i]);
         }
     }

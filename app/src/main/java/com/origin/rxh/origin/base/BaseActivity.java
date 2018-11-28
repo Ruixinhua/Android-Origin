@@ -1,12 +1,17 @@
 package com.origin.rxh.origin.base;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.origin.rxh.origin.R;
+import com.origin.rxh.origin.activity.LoginActivity;
 import com.origin.rxh.origin.general.ActivityManager;
 
 import java.io.InputStream;
@@ -70,5 +75,20 @@ public class BaseActivity extends AppCompatActivity {
                         // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    public void setDialog(String title, String message, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.drawable.ic_launcher_background);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("return", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+            }
+        });
+        builder.show();
     }
 }

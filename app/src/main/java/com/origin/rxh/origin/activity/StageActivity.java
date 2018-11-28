@@ -2,6 +2,7 @@ package com.origin.rxh.origin.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,11 +25,8 @@ import com.origin.rxh.origin.general.StageAdapter;
 import com.origin.rxh.origin.general.UserInfo;
 import com.origin.rxh.origin.listener.LogoutClickListener;
 import com.origin.rxh.origin.listener.NextActivityClickListener;
-import com.origin.rxh.origin.activity.MenuActivity;
-import com.origin.rxh.origin.activity.UserInfoActivity;
 import com.yasic.library.particletextview.View.ParticleTextView;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,11 +53,13 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     public int questionNo = 0;
     private String[] itemNumbers = {"1", "2", "3", "4"};
 
+    private int stageIndex;
     public int[] imageNumbers;
     public List<Integer> imagesNumber;
     public List<String[]> textNumbers;
     public List<List<String>> textContents;
-    public Question[] questions;
+    //public Question[] questions;
+    public List<Question> questionList;
 
     MyInterface myInterface;
     MyInterface.DialogReturn dialogReturn;
@@ -72,13 +71,14 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         setContentView(R.layout.activity_stage);
         init();
 
+        stageIndex = getIntent().getIntExtra("stageIndex",0);
         userInfoBt.setOnClickListener(new NextActivityClickListener(this, UserInfoActivity.class));
         returnBt.setOnClickListener(new NextActivityClickListener(this, MenuActivity.class));
         logoutBt.setOnClickListener(new LogoutClickListener(this));
         mNavigationBar.setLayoutManager(mLayoutManager);
 
         initStageOne();
-        initStage("stage_one_contents.txt");
+        initStage("stage_contents1.txt");
         addButtonListener(this);
         fullScreen();
     }
@@ -94,6 +94,7 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
 //        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_2), getStringById(R.string.par1_sec1_sen2_2), getStringById(R.string.par1_sec1_sen3_2)});
 //        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_3), getStringById(R.string.par1_sec1_sen2_3), getStringById(R.string.par1_sec1_sen3_3)});
         textContents = new ArrayList<>();
+        questionList = MenuActivity.questionsNumber.get(stageIndex);
         textContents.add(new ArrayList<String>());
         textContents.add(new ArrayList<String>());
         textContents.add(new ArrayList<String>());
@@ -118,7 +119,8 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
                     temp[j] = textContents.get(i).get(j);
                     Log.d("file temp",temp[j]);
                 }
-                textContent[i].setConfig(Setting.setConfigDelay(temp));
+                //textContent[i].setConfig(Setting.setConfigDelay(temp));
+                textContent[i].setConfig(Setting.setConfigDelay(MenuActivity.textContents.get(stageIndex).get(i)));
             }
             setContent();
         }
@@ -146,8 +148,8 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         myInterface = new MyInterface();
         myInterface.setListener(this);
         // TODO question store
-        questions = new Question[]{new Question("StageOneQ1", getStringById(R.string.part1_s1_q1), new String[]{getStringById(R.string.part1_s1_a1_A), getStringById(R.string.part1_s1_a1_B)}, 0)};
-        dbs.saveQuestion(questions[0]);
+        //questions = new Question[]{new Question("StageOneQ1", getStringById(R.string.part1_s1_q1), new String[]{getStringById(R.string.part1_s1_a1_A), getStringById(R.string.part1_s1_a1_B)}, 0)};
+        //dbs.saveQuestion(questions[0]);
     }
 
     private Activity stageContext;
@@ -160,7 +162,7 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
                     finish();
                 } else if (textPositionCurrent == 0) {
                     partPositionCurrent--;
-                    textPositionCurrent = 0;
+                    textPositionCurrent = 2;
                     setBackward();
                 } else {
                     textContent[textPositionCurrent].setVisibility(View.INVISIBLE);
@@ -173,10 +175,12 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         forwardBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partPositionCurrent == textContents.get(0).size()) {
+                if (partPositionCurrent == textContents.get(stageIndex).size()) {
                     // TODO start next activity
-                    //showQuestionDialog(questions[0], context);
-                } else if (textPositionCurrent == 2) {
+                    setDialog("Finished","Your grades is "+user.getGrade(),StageActivity.this);
+                    Intent menuActivity = new Intent(StageActivity.this, MenuActivity.class);
+                    startActivity(menuActivity);
+                } else if (textPositionCurrent == 2 && questionNo < questionList.size()) {
                     showQuestionDialog();
                     fullScreen();
                 } else {
@@ -198,7 +202,8 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     public void showQuestionDialog(){
         Log.d("dialog","show question");
         myInterface.setListener(this);
-        tempQuestion = questions[questionNo];
+        //tempQuestion = questions[questionNo];
+        tempQuestion = questionList.get(questionNo);
         dbs = new DBService(this);
         user = dbs.getUser(dbs.getUserTemp());
         Log.d("question size",user.getCorrectQue().size()+"");
@@ -236,6 +241,7 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         }else{
             partPositionCurrent++;
             textPositionCurrent = 0;
+            questionNo++;
             setInvisible();
             setContent();
             myInterface.getListener().onDialogCompleted(false);
@@ -268,6 +274,7 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
             setInvisible();
             setContent();
         }
+        questionNo++;
     }
 
 
@@ -278,9 +285,11 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     }
 
     public void setContent() {
-        imageContent.setImageDrawable(getImageResource(imagesNumber.get(partPositionCurrent)));
-        textContent[textPositionCurrent].setVisibility(View.VISIBLE);
-        textContent[textPositionCurrent].startAnimation();
+        if(partPositionCurrent < imagesNumber.size() && textPositionCurrent < MenuActivity.textContents.get(stageIndex).size()) {
+            imageContent.setImageDrawable(getImageResource(imagesNumber.get(partPositionCurrent)));
+            textContent[textPositionCurrent].setVisibility(View.VISIBLE);
+            textContent[textPositionCurrent].startAnimation();
+        }
     }
 
     public void setBackward() {

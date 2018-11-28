@@ -1,0 +1,7 @@
+StageOneQ1#What is the Big Bang theory?#It is a theory about universe.#It is a theory about art.#0
+StageOneQ2#Why we doubt our universe did in fact have a beginning?#Based on the discoveries in astronomy and physics.#Based on the discoveries in chemistry and biology#0
+StageOneQ3#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageOneQ4#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageOneQ5#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageOneQ6#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageOneQ7#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
