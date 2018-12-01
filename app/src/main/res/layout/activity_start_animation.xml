@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:layout_weight="6"
-    android:background="@drawable/res3"
-    tools:background="@drawable/res3"
+    android:background="@drawable/background"
+    tools:background="@drawable/background"
     tools:context=".activity.LoginActivity">
 
     <com.yasic.library.particletextview.View.ParticleTextView

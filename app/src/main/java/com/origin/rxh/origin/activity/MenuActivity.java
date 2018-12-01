@@ -27,7 +27,7 @@ public class MenuActivity extends LandActivity {
     private Button userInfoBt;
     private DBService dbs;
     private UserInfo user;
-
+    private int stageTotalNumbers;
     public static List<List<String[]>> textContents;
     public static List<List<Integer>> imagesNumber;
     public static List<List<Question>> questionsNumber;
@@ -37,17 +37,6 @@ public class MenuActivity extends LandActivity {
         setContentView(R.layout.activity_menu);
 
         init();
-
-        String userInfoMes = "Welcome "+user.getUsername() + ", your grades is " + user.getGrade();
-        userInfoView.setText(userInfoMes);
-        for(int i = 0;i < user.getGrade() / 10 + 1;i++){
-            stagesBt[i].setClickable(true);
-            stagesBt[i].setAlpha(1f);
-            stagesBt[i].setOnClickListener(new StageStartListener(this,StageActivity.class,i));
-            stagesText[i].setTextColor(getResources().getColor(R.color.stageBrightState));
-        }
-        String warnMes = "You have to get " + ((user.getGrade() / 10 + 1) * 10 - user.getGrade())+ " more marks to enter next stage";
-        warningView.setText(warnMes);
 
         userInfoBt.setOnClickListener(new NextActivityClickListener(this, UserInfoActivity.class));
         logoutBt.setOnClickListener(new LogoutClickListener(this));
@@ -104,6 +93,7 @@ public class MenuActivity extends LandActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        init();
         if(textContents != null && imagesNumber != null && questionsNumber != null){
             return;
         }else{
@@ -120,6 +110,25 @@ public class MenuActivity extends LandActivity {
         userInfoBt = findViewById(R.id.user_info_bt);
         dbs = new DBService(this);
         user = dbs.getUser(dbs.getUserTemp());
+        String userInfoMes = "Welcome "+user.getUsername() + ", your grades is " + user.getCorrectQue().size();
+        userInfoView.setText(userInfoMes);
+        String warnMes;
+        stageTotalNumbers = user.getCorrectQue().size() / 6 + 1;
+        if(stageTotalNumbers > 3) stageTotalNumbers = 3;
+        if(user.getCorrectQue().size()< 30 && user.getCorrectQue().size() >= 12){
+            warnMes = "You can access any stage now!";
+        }else if (user.getCorrectQue().size() < 12 ){
+            warnMes = "You have to get " + (stageTotalNumbers * 6 - user.getCorrectQue().size()) + " more marks to enter next stage";
+        }else{
+            warnMes = "You get full marks!!Congratulation!!";
+        }
+        warningView.setText(warnMes);
+        for(int i = 0;i < stageTotalNumbers;i++){
+            stagesBt[i].setClickable(true);
+            stagesBt[i].setAlpha(1f);
+            stagesBt[i].setOnClickListener(new StageStartListener(this,StageActivity.class,i));
+            stagesText[i].setTextColor(getResources().getColor(R.color.stageBrightState));
+        }
     }
 
 }

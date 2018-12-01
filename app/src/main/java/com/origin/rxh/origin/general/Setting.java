@@ -1,5 +1,6 @@
 package com.origin.rxh.origin.general;
 
+//Reference:https://github.com/Yasic/ParticleTextView
 import com.yasic.library.particletextview.MovingStrategy.BidiHorizontalStrategy;
 import com.yasic.library.particletextview.MovingStrategy.BidiVerticalStrategy;
 import com.yasic.library.particletextview.MovingStrategy.CornerStrategy;

@@ -38,17 +38,21 @@ public class LoginActivity extends BaseActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getUsername().length() == 0){
-                    setDialog("Username empty","The username can not be empty",LoginActivity.this);
-                    setFullScreen();
-                }else if(getUsername().length() > 10){
-                    setDialog("Invalid Username","The length of username should not exceed 10",LoginActivity.this);
-                    setFullScreen();
-                }else if(getPassword().length() < 5 || getPassword().length() > 10){
-                    setDialog("Invalid Password","The length of password should between 6~10",LoginActivity.this);
-                    setFullScreen();
+                if(getUser() == null) {
+                    if (getUsername().length() == 0) {
+                        setDialog("Username empty", "The username can not be empty", LoginActivity.this);
+                        setFullScreen();
+                    } else if (getUsername().length() > 10) {
+                        setDialog("Invalid Username", "The length of username should not exceed 10", LoginActivity.this);
+                        setFullScreen();
+                    } else if (getPassword().length() < 5 || getPassword().length() > 10) {
+                        setDialog("Invalid Password", "The length of password should between 6~10", LoginActivity.this);
+                        setFullScreen();
+                    } else {
+                        changeToAnimation();
+                    }
                 }else{
-                    changeToAnimation();
+                    setDialog("User exist","The user name exist, please select another", LoginActivity.this);
                 }
             }
         });
@@ -101,7 +105,7 @@ public class LoginActivity extends BaseActivity {
 
     private void changeToAnimation(){
         saveUser();
-        fullScreen();
+        setFullScreen();
         Intent startAnimation = new Intent(LoginActivity.this, StartActivity.class);
         startAnimation.putExtra("username",user.getUsername());
         startActivity(startAnimation);
@@ -110,7 +114,7 @@ public class LoginActivity extends BaseActivity {
 
     private void changeToMenu(String username){
         user = getUserInfo();
-        fullScreen();
+        setFullScreen();
         Intent startMenu = new Intent(LoginActivity.this, MenuActivity.class);
         startMenu.putExtra("username",username);
         startActivity(startMenu);

@@ -1,6 +1,7 @@
 package com.origin.rxh.origin.activity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -37,8 +38,8 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_user_info);
-
         init();
         setQuestionAdapter();
         returnBt.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +97,7 @@ public class UserInfoActivity extends BaseActivity {
         dbs = new DBService(this);
         user = dbs.getUser(dbs.getUserTemp());
         usernameText.setText(user.getUsername());
-        String tempGrades = "Grades: " + user.getGrade();
+        String tempGrades = "Grades: " + user.getCorrectQue().size();
         gradesText.setText(tempGrades);
         returnMBt = findViewById(R.id.returnm_bt);
         returnBt = findViewById(R.id.return_bt);
@@ -119,5 +120,11 @@ public class UserInfoActivity extends BaseActivity {
             textView.setText((String) getItem(position));
             return view;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -1,6 +1,7 @@
 package com.origin.rxh.origin.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -28,9 +29,10 @@ import com.origin.rxh.origin.listener.NextActivityClickListener;
 import com.yasic.library.particletextview.View.ParticleTextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class StageActivity extends LandActivity implements MyInterface.DialogReturn{
+public class StageActivity extends LandActivity implements MyInterface.DialogReturn {
 
     private TextView usernameText;
     private TextView gradesText;
@@ -54,13 +56,11 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     private String[] itemNumbers = {"1", "2", "3", "4"};
 
     private int stageIndex;
-    public int[] imageNumbers;
     public List<Integer> imagesNumber;
-    public List<String[]> textNumbers;
     public List<List<String>> textContents;
-    //public Question[] questions;
     public List<Question> questionList;
 
+    public List<Integer[]> imageResources;
     MyInterface myInterface;
     MyInterface.DialogReturn dialogReturn;
 
@@ -71,59 +71,42 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         setContentView(R.layout.activity_stage);
         init();
 
-        stageIndex = getIntent().getIntExtra("stageIndex",0);
+        stageIndex = getIntent().getIntExtra("stageIndex", 0);
         userInfoBt.setOnClickListener(new NextActivityClickListener(this, UserInfoActivity.class));
         returnBt.setOnClickListener(new NextActivityClickListener(this, MenuActivity.class));
         logoutBt.setOnClickListener(new LogoutClickListener(this));
         mNavigationBar.setLayoutManager(mLayoutManager);
 
-        initStageOne();
-        initStage("stage_contents1.txt");
+        initStage();
         addButtonListener(this);
         fullScreen();
     }
 
-    private void initStageOne() {
+    private void initStage() {
         mAdapter = new StageAdapter(itemNumbers);
         //mNavigationBar.setAdapter(mAdapter);
 
-//        imageNumbers = new int[]{R.drawable.res1, R.drawable.res2, R.drawable.res3};
+        imageResources = new ArrayList<>();
+        imageResources.add(new Integer[]{R.drawable.stage1_res1,R.drawable.stage1_res2,R.drawable.stage1_res3,
+                R.drawable.stage1_res4,R.drawable.stage1_res5,R.drawable.stage1_res6,R.drawable.stage1_res7,
+                R.drawable.stage1_res8,R.drawable.stage1_res3,R.drawable.stage1_res4});
+        imageResources.add(new Integer[]{R.drawable.stage2_res1,R.drawable.stage2_res2,R.drawable.stage2_res3,
+                R.drawable.stage2_res4,R.drawable.stage2_res5,R.drawable.stage2_res6,R.drawable.stage2_res7,
+                R.drawable.stage2_res8,R.drawable.stage2_res3,R.drawable.stage2_res4});
+        imageResources.add(new Integer[]{R.drawable.stage3_res1,R.drawable.stage3_res2,R.drawable.stage3_res3,
+                R.drawable.stage3_res4,R.drawable.stage3_res5,R.drawable.stage3_res6,R.drawable.stage3_res7,
+                R.drawable.stage3_res8,R.drawable.stage3_res3,R.drawable.stage3_res4});
         imagesNumber = new ArrayList<>();
-//        textNumbers = new ArrayList<>();
-//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_1), getStringById(R.string.par1_sec1_sen2_1), getStringById(R.string.par1_sec1_sen3_1)});
-//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_2), getStringById(R.string.par1_sec1_sen2_2), getStringById(R.string.par1_sec1_sen3_2)});
-//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_3), getStringById(R.string.par1_sec1_sen2_3), getStringById(R.string.par1_sec1_sen3_3)});
+        imagesNumber.addAll(Arrays.asList(imageResources.get(stageIndex)));
         textContents = new ArrayList<>();
         questionList = MenuActivity.questionsNumber.get(stageIndex);
         textContents.add(new ArrayList<String>());
         textContents.add(new ArrayList<String>());
         textContents.add(new ArrayList<String>());
-
-    }
-
-    private void initStage(String fileName){
-        String reads = readFile(fileName);
-        Log.d("file",reads);
-        if(reads != null) {
-            String stageContents[] = reads.split("\n");
-            for (String stageContent : stageContents) {
-                String temp[] = stageContent.split("#");
-                for (int j = 0; j < temp.length; j++) {
-                    textContents.get(j).add(temp[j]);
-                }
-                imagesNumber.add(R.drawable.res1);
-            }
-            for (int i = 0; i < textContent.length; i++) {
-                String temp[] = new String[textContents.get(i).size()];
-                for (int j = 0; j < temp.length; j++) {
-                    temp[j] = textContents.get(i).get(j);
-                    Log.d("file temp",temp[j]);
-                }
-                //textContent[i].setConfig(Setting.setConfigDelay(temp));
-                textContent[i].setConfig(Setting.setConfigDelay(MenuActivity.textContents.get(stageIndex).get(i)));
-            }
-            setContent();
+        for (int i = 0; i < textContent.length; i++) {
+            textContent[i].setConfig(Setting.setConfigDelay(MenuActivity.textContents.get(stageIndex).get(i)));
         }
+        setContent();
     }
 
     private void init() {
@@ -132,7 +115,7 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         dbs = new DBService(this);
         user = dbs.getUser(dbs.getUserTemp());
         usernameText.setText(user.getUsername());
-        String tempGrades = "Grades: " + user.getGrade();
+        String tempGrades = "Grades: " + user.getCorrectQue().size();
         gradesText.setText(tempGrades);
         userInfoBt = findViewById(R.id.user_info_bt);
         returnBt = findViewById(R.id.return_bt);
@@ -153,34 +136,43 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     }
 
     private Activity stageContext;
-    public void addButtonListener(Activity context){
+
+    public void addButtonListener(Activity context) {
         stageContext = context;
+
+        // backward button listener
         backwardBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (partPositionCurrent == 0 && textPositionCurrent == 0) {
                     finish();
-                } else if (textPositionCurrent == 0) {
+                } else if (textPositionCurrent <= 0) {
                     partPositionCurrent--;
-                    textPositionCurrent = 2;
+                    textPositionCurrent = 0;
+                    questionNo = partPositionCurrent;
                     setBackward();
                 } else {
-                    textContent[textPositionCurrent].setVisibility(View.INVISIBLE);
-                    textContent[textPositionCurrent].backwardAnimation();
-                    textPositionCurrent--;
+                    if (textPositionCurrent < 3) {
+                        textContent[textPositionCurrent].setVisibility(View.INVISIBLE);
+                        textContent[textPositionCurrent].setTargetText(partPositionCurrent);
+                        textPositionCurrent--;
+                    }
                 }
             }
         });
 
+        // forward button listener
         forwardBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (partPositionCurrent == textContents.get(stageIndex).size()) {
+
+                if (partPositionCurrent >= MenuActivity.textContents.get(stageIndex).get(0).length) {
                     // TODO start next activity
-                    setDialog("Finished","Your grades is "+user.getGrade(),StageActivity.this);
-                    Intent menuActivity = new Intent(StageActivity.this, MenuActivity.class);
-                    startActivity(menuActivity);
-                } else if (textPositionCurrent == 2 && questionNo < questionList.size()) {
+                    textPositionCurrent = -1;
+                    partPositionCurrent = MenuActivity.textContents.get(stageIndex).get(0).length - 1;
+                    questionNo = partPositionCurrent;
+                    setDialog("Finished", "Your grades is " + user.getCorrectQue().size(), StageActivity.this);
+                } else if (textPositionCurrent == 2) {
                     showQuestionDialog();
                     fullScreen();
                 } else {
@@ -188,6 +180,8 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
                     if (textPositionCurrent < 3) {
                         // TODO setContent
                         setContent();
+                    } else {
+                        textPositionCurrent = 2;
                     }
 
                 }
@@ -195,24 +189,40 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
         });
     }
 
+    @Override
+    public void setDialog(String title, String message, Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.drawable.ic_launcher_background);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("return menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent menuActivity = new Intent(StageActivity.this, MenuActivity.class);
+                startActivity(menuActivity);
+                finish();
+            }
+        });
+        builder.show();
+    }
 
-
-    private int choice;
+    private int choice = -1;
     private Question tempQuestion;
-    public void showQuestionDialog(){
-        Log.d("dialog","show question");
+
+    public void showQuestionDialog() {
+        Log.d("dialog", "show question");
         myInterface.setListener(this);
         //tempQuestion = questions[questionNo];
         tempQuestion = questionList.get(questionNo);
         dbs = new DBService(this);
         user = dbs.getUser(dbs.getUserTemp());
-        Log.d("question size",user.getCorrectQue().size()+"");
-        for(Question q:user.getCorrectQue().values()){
-            Log.d("question",q.getQuestionNo());
+        Log.d("question size", user.getCorrectQue().size() + "");
+        for (Question q : user.getCorrectQue().values()) {
+            Log.d("question", q.getQuestionNo());
         }
-        Log.d("question temp",tempQuestion.getQuestionNo());
-        if(user.getCorrectQue().get(tempQuestion.getQuestionNo()) == null) {
-            Log.d("dialog","question");
+        Log.d("question temp", tempQuestion.getQuestionNo());
+        if (user.getCorrectQue().get(tempQuestion.getQuestionNo()) == null) {
+            Log.d("dialog", "question");
 
             AlertDialog.Builder questionDialog = new AlertDialog.Builder(stageContext);
             questionDialog.setTitle(tempQuestion.getQuestion());
@@ -238,10 +248,10 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
                 }
             });
             questionDialog.show();
-        }else{
+        } else {
             partPositionCurrent++;
             textPositionCurrent = 0;
-            questionNo++;
+            questionNo = partPositionCurrent;
             setInvisible();
             setContent();
             myInterface.getListener().onDialogCompleted(false);
@@ -250,31 +260,33 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
 
     @Override
     public void onDialogCompleted(boolean answer) {
-        if(answer){
+        if (answer) {
             partPositionCurrent++;
             textPositionCurrent = 0;
-            if(tempQuestion.getCorrectAnswer() == choice) {
+            if (tempQuestion.getCorrectAnswer() == choice) {
                 Log.d("submit", "info");
                 user.updateCorrect(tempQuestion);
+                user.getWrongQue().remove(tempQuestion.getQuestionNo());
                 user.updateGrade(1);
-                Log.d("submit",user.getCorrectQue().size()+"");
+                Log.d("submit", user.getCorrectQue().size() + "");
                 for (Question q : user.getCorrectQue().values()) {
-                    Log.d("submit user",q.getQuestionNo());
+                    Log.d("submit user", q.getQuestionNo());
                 }
 
                 dbs.saveUser(user);
-                Log.d("submit dbs", dbs.getUser(dbs.getUserTemp()).getGrade() + "");
+                Log.d("submit dbs", dbs.getUser(dbs.getUserTemp()).getCorrectQue().size() + "");
                 Log.d("submit question", dbs.getUser(dbs.getUserTemp()).getCorrectQue().get(tempQuestion.getQuestionNo()).getQuestionNo());
-                String tempGrades = "Grades: " + user.getGrade();
+                String tempGrades = "Grades: " + user.getCorrectQue().size();
                 gradesText.setText(tempGrades);
-            }else{
+            } else {
                 user.updateWrong(tempQuestion);
                 dbs.saveUser(user);
             }
             setInvisible();
             setContent();
         }
-        questionNo++;
+        choice = -1;
+        questionNo = partPositionCurrent;
     }
 
 
@@ -285,29 +297,34 @@ public class StageActivity extends LandActivity implements MyInterface.DialogRet
     }
 
     public void setContent() {
-        if(partPositionCurrent < imagesNumber.size() && textPositionCurrent < MenuActivity.textContents.get(stageIndex).size()) {
+        if (partPositionCurrent < imagesNumber.size() && textPositionCurrent < MenuActivity.textContents.get(stageIndex).size()) {
             imageContent.setImageDrawable(getImageResource(imagesNumber.get(partPositionCurrent)));
             textContent[textPositionCurrent].setVisibility(View.VISIBLE);
+            textContent[textPositionCurrent].setTargetText(partPositionCurrent);
             textContent[textPositionCurrent].startAnimation();
         }
     }
 
     public void setBackward() {
         for (int i = 0; i < textContent.length; i++) {
-            textContent[i].backwardAnimation();
-            textContent[i].backwardAnimation();
+            textContent[i].setTargetText(partPositionCurrent);
         }
-        for (int i = 0; i < textContent.length; i++) {
-            textContent[i].startAnimation();
-        }
+        textContent[textPositionCurrent].setVisibility(View.VISIBLE);
+        textContent[textPositionCurrent].startAnimation();
         imageContent.setImageDrawable(getImageResource(imagesNumber.get(partPositionCurrent)));
     }
 
-    public Drawable getImageResource(int id){
+    public Drawable getImageResource(int id) {
         return getResources().getDrawable(id);
     }
+
     public String getStringById(int id) {
         return getResources().getString(id);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

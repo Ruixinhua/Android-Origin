@@ -97,12 +97,12 @@ public class ParticleTextView extends View {
         this.textIterator = 0;
     }
 
-    public void backwardAnimation(){
+    public void setTargetText(int index){
         if(isAnimationFrozen){
-            textIterator--;
-            if(textIterator < 0) textIterator = 0;
+            textIterator = index;
         }
     }
+
 
     public void forwardAnimation(){
         if(isAnimationFrozen){

@@ -1,7 +1,10 @@
-StageOneQ1#What is the Big Bang theory?#It is a theory about universe.#It is a theory about art.#0
-StageOneQ2#Why we doubt our universe did in fact have a beginning?#Based on the discoveries in astronomy and physics.#Based on the discoveries in chemistry and biology#0
-StageOneQ3#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ4#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ5#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ6#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ7#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageTwoQ1#How stars forms?#The denser matter attracted nearby matter.#We don't know#0
+StageTwoQ2#When did the first galaxies formed?#About a billion years after the Big Bang.#About a million years after the Big Bang.#0
+StageTwoQ3#List the one of type of galaxies.#barred spiral#rectangle#0
+StageTwoQ4#What the feature of elliptical galaxy?#We don't know.#having an ellipsoidal shape.#1
+StageTwoQ5#Wat is contained in spiral galaxies?#stars,gas,dust#light,food,clothes#0
+StageTwoQ6#Our Solar system is contained in Milky?#Yes#No#0
+StageTwoQ7#What is irregular galaxy?#It is regular.#It is not regular and chaotic in shape#1
+StageTwoQ8#What is a compact site of star formation?#water and food#dense gas and dust#1
+StageTwoQ9#What is the first stage?#Accreting cooling gas.#releasing cooling gas#0
+StageTwoQ10#What is the second stage?#Suppressing gas cooling#Increasing gas cooling#0

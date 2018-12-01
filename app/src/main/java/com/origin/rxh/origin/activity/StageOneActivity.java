@@ -26,14 +26,14 @@ public class StageOneActivity extends StageActivity {
         mAdapter = new StageAdapter(itemNumbers);
         mNavigationBar.setAdapter(mAdapter);
 
-        imageNumbers = new int[]{R.drawable.res1, R.drawable.res2, R.drawable.res3};
-        textNumbers = new ArrayList<>();
-        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_1), getStringById(R.string.par1_sec1_sen2_1), getStringById(R.string.par1_sec1_sen3_1)});
-        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_2), getStringById(R.string.par1_sec1_sen2_2), getStringById(R.string.par1_sec1_sen3_2)});
-        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_3), getStringById(R.string.par1_sec1_sen2_3), getStringById(R.string.par1_sec1_sen3_3)});
-        for (int i = 0; i < textContent.length; i++) {
-            textContent[i].setConfig(Setting.setConfigDelay(textNumbers.get(i)));
-        }
+        //imageNumbers = new int[]{R.drawable.res1, R.drawable.res2, R.drawable.background};
+//        textNumbers = new ArrayList<>();
+//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_1), getStringById(R.string.par1_sec1_sen2_1), getStringById(R.string.par1_sec1_sen3_1)});
+//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_2), getStringById(R.string.par1_sec1_sen2_2), getStringById(R.string.par1_sec1_sen3_2)});
+//        textNumbers.add(new String[]{getStringById(R.string.par1_sec1_sen1_3), getStringById(R.string.par1_sec1_sen2_3), getStringById(R.string.par1_sec1_sen3_3)});
+//        for (int i = 0; i < textContent.length; i++) {
+//            textContent[i].setConfig(Setting.setConfigDelay(textNumbers.get(i)));
+//        }
 
         setContent();
     }

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:layout_weight="6"
-    android:background="@drawable/res3"
-    tools:background="@drawable/res3"
+    android:background="@drawable/background"
+    tools:background="@drawable/background"
     tools:context=".activity.LoginActivity">
 
     <ImageButton
@@ -17,6 +17,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="8dp"
         android:alpha="0.5"
         android:background="@drawable/bigbang"
         android:clickable="false"

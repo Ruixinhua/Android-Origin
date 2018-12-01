@@ -1,7 +1,10 @@
 StageOneQ1#What is the Big Bang theory?#It is a theory about universe.#It is a theory about art.#0
 StageOneQ2#Why we doubt our universe did in fact have a beginning?#Based on the discoveries in astronomy and physics.#Based on the discoveries in chemistry and biology#0
-StageOneQ3#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ4#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ5#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ6#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ7#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageOneQ3#Hong long about our universe has?#About 13.7 billion(1,000,000,000) years.#About 13.7 million(1,000,000) years#0
+StageOneQ4#Do we know many about singularity?#Yes, we do.#No, we don't.#1
+StageOneQ5#Where "singularity" may exist.#In some place we know like your house.#In "black holes" where we don't know too much#1
+StageOneQ6#What is the feature of black holes?#It is black.#The pressure is very high.#1
+StageOneQ7#Use three word to describe black holes.#small, hot, dense.#bigm clod, loose.#0
+StageOneQ8#What happened about universe next?#rapidly expanding and cooling#loosing and heating#0
+StageOneQ9#What was decreasing at that moment?#nothing#density, temperature, energy.#1
+StageOneQ10#When the chemistry of life may happen?#When the universe was 10 billion years old#When the universe was 10 million years old#1

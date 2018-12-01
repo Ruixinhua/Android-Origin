@@ -1,7 +1,10 @@
-StageOneQ1#What is the Big Bang theory?#It is a theory about universe.#It is a theory about art.#0
-StageOneQ2#Why we doubt our universe did in fact have a beginning?#Based on the discoveries in astronomy and physics.#Based on the discoveries in chemistry and biology#0
-StageOneQ3#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ4#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ5#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ6#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
-StageOneQ7#What is "singularities"?#These zones of limited density.#These zones of infinite density.#1
+StageThreeQ1#How many stars our solar system may have?#100–400 billion stars.#100–400 million stars.#0
+StageThreeQ2#How long is the diameter?#150,000 and 200,000 light-years#150,000 and 200,000 years.#0
+StageThreeQ3#When the oldest stars formed in Milky Way?#After the Dark Ages of the Big Bang.#At hte end of the Dark Ages of the Big Bang.#1
+StageThreeQ4#Our solar system is a galaxy?#Yes#No#0
+StageThreeQ5#When our sun formed?#4.6 million years ago#4.6 billion years ago#1
+StageThreeQ6#List the four inner planet.#Mercury, Venus, Earth and Mars#Jupiter, Saturn, Uranus and Neptune#0
+StageThreeQ7#List the four outer planet.#Mercury, Venus, Earth and Mars#Jupiter, Saturn, Uranus and Neptune#1
+StageThreeQ8#When was Earth formed?#4.5 million years ago#4.5 billion years ago#1
+StageThreeQ9#When can be think as the origin of human?#About 315,000 years ago#Around 50,000 years ago#0
+StageThreeQ10#What make us being human?#Curiosity and understanding#Food and Tool#0
