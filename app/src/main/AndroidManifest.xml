@@ -41,9 +41,6 @@
             android:name=".activity.StageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.StageOneActivity">
-
-        </activity>
     </application>
 
 </manifest>
